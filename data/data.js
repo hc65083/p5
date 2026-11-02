@@ -1,39 +1,47 @@
 let myData
+let gridSize = 200
+let cols, rows
 
 async function setup() {
-  createCanvas(800, 500);
+  createCanvas(800, 800);
+  cols = int(width/gridSize)
+  rows = int(height/gridSize)
+
   myData = await loadJSON('data.json');
   console.log(myData)
 }
 
 function draw() {
   background("beige");
-  
-  for (let i = 0; i < myData.length; i++) {
-    let type = myData[i]
-    let x = (i+1) * 50
-    let y = height / 2
-    let num = 8
-    let c
-    let petalLen = 0
-    
-    if (type.size === "s") {
-      petalLen = height * 0.1 // shorter
-    } 
 
-    else if (type.size === 'n') {
-      petalLen = height * 0.2 // longer
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+      
+      let type = myData[i]
+      let x = i * gridSize + gridSize/2
+      let y = j * gridSize + gridSize/2
+      let num = 8
+      let c
+      let petalLen = 0
+      
+      if (type.size === "s") {
+        petalLen = gridSize * 0.4 // shorter
+      } 
+
+      else if (type.size === 'n') {
+        petalLen = gridSize * 0.6 // longer
+      }
+
+      if (type.petal === "t") {
+        c = "skyblue"
+      } 
+
+      else if (type.petal === 'f') {
+        c = "pink"
+      }
+
+     drawFlower(x, y, petalLen, c, type.filament, type.spread, num)
     }
-
-    if (type.petal === "t") {
-      c = "skyblue"
-    } 
-
-    else if (type.petal === 'f') {
-      c = "pink"
-    }
-
-  drawFlower(x, y, petalLen, c, type.filament, type.spread, num)
   }
 }
 
