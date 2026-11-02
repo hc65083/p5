@@ -24,21 +24,21 @@ function draw() {
      background('#F3EFE6')
 
   // a new creature now and then, so the room never empties
-  if (frameCount % 120 === 0 && creatures.length < 10) {
-    catss.push(makeCreature(random(width), random(height)))
+  if (frameCount % 120 === 0 && cats.length < 10) {
+    cats.push(makeCat(random(width), random(height)))
   }
 
-  for (let i = creatures.length - 1; i >= 0; i--) {
-    let c = creatures[i]
+  for (let i = cats.length - 1; i >= 0; i--) {
+    let c = cats[i]
     let d = dist(c.x, c.y, mouseX, mouseY)
-    let scared = d < 120
+    let cactivated = d < 120
 
     // 1. wander: noise picks a speed in x and in y
     c.x += map(noise(c.seed, c.t), 0, 1, -2, 2)
     c.y += map(noise(c.seed + 500, c.t), 0, 1, -2, 2)
 
     // 2. run away from the mouse
-    if (scared) {
+    if (cactivated) {
       let away = atan2(c.y - mouseY, c.x - mouseX)
       c.x += cos(away) * 4
       c.y += sin(away) * 4
@@ -47,22 +47,27 @@ function draw() {
     c.y = constrain(c.y, 0, height)
 
     // 3. mood: a scared creature moves through noise faster, so it wobbles more
-    if (scared) {
+    if (cactivated) {
       c.t += 0.08
     } else {
       c.t += 0.01
     }
 
     c.life -= 1
-    drawCreature(c, scared)
+    drawCat(c, cactivated)
 
     if (c.life <= 0) {
-      creatures.splice(i, 1)
+      cats.splice(i, 1)
     }
   }
 }
 
-function drawCat(c) {
+function drawCat(c, cactivated) {
+ let asleep = c.life < 180
+  let alphaValue = 255
+  if (asleep) {
+    alphaValue = map(c.life, 0, 180, 0, 255)   // fade out while sleeping
+  }
 
   push()
   translate(c.x, c.y)
@@ -84,24 +89,22 @@ function drawCat(c) {
   // eyes
   let e = c.size * 0.18
   
-//   if (blink) {
+  if (cactivated) {
 //     // closed eyes
 //     line(-e * 1.6, -e * 0.3, -e * 0.6, -e * 0.3)
 //     line(e * 0.6, -e * 0.3, e * 1.6, -e * 0.3)
-//   } 
-  
-//   else {
-//     let look = atan2(mouseY - c.y, mouseX - c.x)   // where the mouse is
-//     for (let side = -1; side <= 1; side += 2) {
-//       let ex = side * e * 1.1
-//       fill(255, alphaValue)
-//       strokeWeight(2)
-//       circle(ex, -e * 0.3, e * 1.6)
-//       noStroke()
-//       fill(20, 22, 31, alphaValue)
-//       circle(ex + cos(look) * e * 0.35, -e * 0.3 + sin(look) * e * 0.35, e * 0.7)
-//       stroke(20, 22, 31, alphaValue)
-//     }
-//   }
+//   
+    let look = atan2(mouseY - c.y, mouseX - c.x)   // where the mouse is
+    for (let side = -1; side <= 1; side += 2) {
+      let ex = side * e * 1.1
+      fill(255, alphaValue)
+      strokeWeight(2)
+      circle(ex, -e * 0.3, e * 1.6)
+      noStroke()
+      fill(20, 22, 31, alphaValue)
+      circle(ex + cos(look) * e * 0.35, -e * 0.3 + sin(look) * e * 0.35, e * 0.7)
+      stroke(20, 22, 31, alphaValue)
+    }
+  }
 pop()
 }
