@@ -17,7 +17,8 @@ function draw() {
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
       
-      let type = myData[i]
+      let index = j * cols + i
+      let type = myData[index]
       let x = i * gridSize + gridSize/2
       let y = j * gridSize + gridSize/2
       let num = 8
@@ -40,7 +41,14 @@ function draw() {
         c = "pink"
       }
 
-     drawFlower(x, y, petalLen, c, type.filament, type.spread, num)
+    drawFlower(x, y, petalLen, c, type.filament, type.spread, num)
+    
+    push()
+    fill("black")
+    noStroke()
+    textAlign(CENTER, CENTER)
+    text(type.mbti.toUpperCase(), x, y)
+    pop()
     }
   }
 }
@@ -127,7 +135,7 @@ function drawFilament(filament) {
       translate(0, 0)   
       rotate(radians(-60))
       fill("LightYellow")
-      circle(0,0,20)
+      circle(0,0,40)
       pop()
     }
     pop()
@@ -135,7 +143,7 @@ function drawFilament(filament) {
 
   else if (filament === 'i') {
     fill("LightYellow")
-    ellipse(0,0,30)
+    ellipse(0,0,40)
   }
 
 }
