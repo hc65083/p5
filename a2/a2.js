@@ -17,15 +17,19 @@ function draw() {
       
       let upValue = map(sin(frameCount*0.1+i+j), -1, 1, -10, 10)
       push()
+      
+      let d = dist(x,y,mouseX,mouseY)
+      let circleSize = map(d,0,400,gridSize, gridSize*0.2)
+      let r = map (x,0,width,20,250)
+      let b = map (y,0,height,0,250)
+    
+      noStroke()
+      fill("white")
+
+        circle(x,y,circleSize)
+
         translate(0,upValue) // wave
         translate(x, y) 
-
-        //circle
-        push()
-        fill("#ffe252")
-        ellipse(0,0,gridSize*5, gridSize*2) 
-        // translate (x,y,gridSize*2)
-        pop()
       
         // mouth
         push()
@@ -47,4 +51,9 @@ function draw() {
   }
 }
 // 3-2 Generative Patterns
-// Design and create a pattern that changes dynamically with nested for loops. Combine conditionals (if/else), modulo (%), random(), or map() to create variation across the pattern. Use transformations such as push(), pop(), translate(), rotate(), scale(), and shearX() to draw each item in the grid. To animate it, try frameCount with sin() or cos(), or respond to the mouse with mouseX and mouseY.
+// Design and create a pattern that changes dynamically 
+// with nested for loops. Combine conditionals (if/else), 
+// modulo (%), random(), or map() to create variation across the pattern. 
+// Use transformations such as push(), pop(), translate(), rotate(), scale(), 
+// and shearX() to draw each item in the grid. To animate it, 
+// try frameCount with sin() or cos(), or respond to the mouse with mouseX and mouseY.
