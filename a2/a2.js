@@ -46,3 +46,5 @@ function draw() {
     }
   }
 }
+// 3-2 Generative Patterns
+// Design and create a pattern that changes dynamically with nested for loops. Combine conditionals (if/else), modulo (%), random(), or map() to create variation across the pattern. Use transformations such as push(), pop(), translate(), rotate(), scale(), and shearX() to draw each item in the grid. To animate it, try frameCount with sin() or cos(), or respond to the mouse with mouseX and mouseY.
