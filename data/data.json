@@ -53,5 +53,77 @@
     "size": "s",
     "petal": "f",
     "spread": "j"
+  },
+
+  {
+    "mbti": "estp",
+    "filament": "e",
+    "size": "s",
+    "petal": "t",
+    "spread": "p"
+  },
+
+  {
+    "mbti": "esfp",
+    "filament": "e",
+    "size": "s",
+    "petal": "f",
+    "spread": "p"
+  },
+
+  {
+    "mbti": "intp",
+    "filament": "i",
+    "size": "n",
+    "petal": "t",
+    "spread": "p"
+  },
+
+  {
+    "mbti": "intj",
+    "filament": "i",
+    "size": "n",
+    "petal": "t",
+    "spread": "j"
+  },
+
+  {
+    "mbti": "infp",
+    "filament": "i",
+    "size": "n",
+    "petal": "f",
+    "spread": "p"
+  },
+
+  {
+    "mbti": "infj",
+    "filament": "i",
+    "size": "n",
+    "petal": "f",
+    "spread": "j"
+  },
+
+  {
+    "mbti": "istp",
+    "filament": "i",
+    "size": "s",
+    "petal": "t",
+    "spread": "p"
+  },
+
+  {
+    "mbti": "isfp",
+    "filament": "i",
+    "size": "s",
+    "petal": "f",
+    "spread": "p"
+  },
+
+  {
+    "mbti": "isfj",
+    "filament": "i",
+    "size": "s",
+    "petal": "f",
+    "spread": "j"
   }
 ]

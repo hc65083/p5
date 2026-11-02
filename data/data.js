@@ -69,17 +69,7 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
 //   }
 
   // else if (c === "pink") {
-  //   for (let i = 0; i < num; i++) {
-  //     let petal = slice - gap
-      
-  //     push()
-  //     rotate(i * slice)
-  //     translate(5, 0)
-  //     fill(c)
-  //     triangle(0,0, 64, 64, petal/2, petal/2)
-  //     pop()
-  //   }
-  // }  
+
 
   pop()
   
@@ -119,7 +109,6 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
     rect(0, 0, petalLen, petalLen, 0, petalLen / 2, petalLen / 2, petalLen / 2)
     pop()
   }
-
   pop()
 
   // filament
@@ -132,8 +121,16 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
 
 function drawFilament(filament) {
   if (filament === 'e') {
-    fill("LightYellow")
-    circle(0,0,20)
+    push()
+    for (let i = 0; i < 5; i++) {    
+      push()
+      translate(0, 0)   
+      rotate(radians(-60))
+      fill("LightYellow")
+      circle(0,0,20)
+      pop()
+    }
+    pop()
   } 
 
   else if (filament === 'i') {
