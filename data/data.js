@@ -12,7 +12,7 @@ async function setup() {
 }
 
 function draw() {
-  background("beige");
+  background("paper");
 
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -25,11 +25,11 @@ function draw() {
       let petalLen = 0
       
       if (type.size === "s") {
-        petalLen = gridSize * 0.4 // shorter
+        petalLen = gridSize * 0.2 // shorter
       } 
 
       else if (type.size === 'n') {
-        petalLen = gridSize * 0.6 // longer
+        petalLen = gridSize * 0.35 // longer
       }
 
       if (type.petal === "t") {
@@ -53,31 +53,33 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
   let slice = TWO_PI / num
   let gap = slice * 0.3 // small gap between petals
   
-  if (c === "skyblue") {
-    
-    for (let i = 0; i < num; i++) {
-      let petal = slice - gap
-      push()
-      rotate(i * slice)
-      translate(0, 0) // dist from center
-      fill(c)
-      triangle(0,0, 64, 64, petal/2, petal/2)
-      pop()
-    }
-  }
+//  if (c === "skyblue") {
+//     push()
+//        for (let i = 0; i < num; i++) {
+//       let petal = slice - gap
+     
+//       push()
+//       translate(0, 0) // dist from center
+//       rotate(i * slice)
+//       fill(c)
+//       triangle(0,0, 64, 64, petal/2, petal/2)
+//       pop()
+//     }
+//   pop()
+//   }
 
-  else if (c === "pink") {
-    for (let i = 0; i < num; i++) {
-      let petal = slice - gap
+  // else if (c === "pink") {
+  //   for (let i = 0; i < num; i++) {
+  //     let petal = slice - gap
       
-      push()
-      rotate(i * slice)
-      translate(5, 0)
-      fill(c)
-      triangle(0,0, 64, 64, petal/2, petal/2)
-      pop()
-    }
-  }  
+  //     push()
+  //     rotate(i * slice)
+  //     translate(5, 0)
+  //     fill(c)
+  //     triangle(0,0, 64, 64, petal/2, petal/2)
+  //     pop()
+  //   }
+  // }  
 
   pop()
   
@@ -86,19 +88,35 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
   let waviness = 10   
   let waveFreq = 0.05 
 
+  // push()
+  // translate(x, y)
+
+  // for (let i = 0; i < num; i++) {
+  //   let d = petalLen * (i + 1) / (num + 1)   // how far down the stem
+  //   let wave = sin(d * waveFreq) * waviness  // where the stem is at that height
+    
+  //   push()
+  //   translate(wave, d)
+  //   if (i%2===0) scale(-1,1)
+  //   translate(0, 0)    // dist from mid
+  //   rotate(radians(-60))
+  //   fill(c)
+  //   rect(0, 0, spread, spread, 0, spread / 2, spread / 2, spread / 2)
+  //   pop()
+  // }
+
+  // pop()
+
   push()
   translate(x, y)
 
-  for (let i = 0; i < num; i++) {
-    let d = petalLen * (i + 1) / (num + 1)   // how far down the stem
-    let wave = sin(d * waveFreq) * waviness  // where the stem is at that height
+  for (let i = 0; i < num; i++) {    
     push()
-    translate(wave, d)
     if (i%2===0) scale(-1,1)
-    translate(8, 0)    // dist from mid
-    rotate(radians(-60))
+    translate(0, 0)    // dist from mid
+    rotate(i*slice)
     fill(c)
-    rect(0, 0, spread, spread, 0, spread / 2, spread / 2, spread / 2)
+    rect(0, 0, petalLen, petalLen, 0, petalLen / 2, petalLen / 2, petalLen / 2)
     pop()
   }
 
