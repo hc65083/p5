@@ -20,11 +20,9 @@ function draw() {
       
       let d = dist(x,y,mouseX,mouseY)
       let circleSize = map(d,0,400,gridSize, gridSize*0.2)
-      let r = map (x,0,width,20,250)
-      let b = map (y,0,height,0,250)
     
       noStroke()
-      fill("white")
+      fill("yellow")
 
         circle(x,y,circleSize)
 
