@@ -59,9 +59,9 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
       let petal = slice - gap
       push()
       rotate(i * slice)
-      translate(5, 0) // dist from center
+      translate(0, 0) // dist from center
       fill(c)
-      triangle(0,0, 64, 64, -petal/2, petal/2)
+      triangle(0,0, 64, 64, petal/2, petal/2)
       pop()
     }
   }
@@ -74,7 +74,7 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
       rotate(i * slice)
       translate(5, 0)
       fill(c)
-      triangle(0,0, 64, 64, -petal/2, petal/2)
+      triangle(0,0, 64, 64, petal/2, petal/2)
       pop()
     }
   }  
