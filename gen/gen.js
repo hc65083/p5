@@ -45,20 +45,20 @@ function setup() {
   createP('Create Your Own Firework')
   createP('Tail')
   tailCheckbox = createCheckbox('Yes', true);
+  createElement('label', 'length')
   tailLenSlider = createSlider(30,100, 50)
   
   createP('Shots')
   shotsNumSlider = createSlider(1,10, 1) // min, max, default, step
   createElement('label', 'gap')
   shotsGapSlider = createSlider(50,150, 10)
-  createElement('label', 'color')
-  shotsColorPicker = createColorPicker("#ff2a00")
   createElement('label', 'length')
   shotsLenSlider = createSlider(1,10, 1)
   createElement('label', 'width')
   shotsStrokeWeightSlider  = createSlider(1,10, 1)
   createElement('label', 'distance')
   shotsDistSlider = createSlider(0, 150, 100)
+  shotsColorPicker = createColorPicker("#ff2a00")
 
   // lines 1
   createP('Lines 1')
@@ -70,9 +70,9 @@ function setup() {
   lines1DistSlider = createSlider(0, 150, 100)
   createElement('label', 'spin')
   lines1SpinSlider = createSlider(0, 360, 90, 5)
-  lines1ColorPicker = createColorPicker("#ffff00")
   createElement('label', 'weight')
   lines1StrokeWeightSlider = createSlider(1, 20, 6)
+  lines1ColorPicker = createColorPicker("#ffff00")
 
   // lines 2
   createP('Lines 2')
@@ -84,9 +84,9 @@ function setup() {
   lines2DistSlider = createSlider(0, 150, 100)
   createElement('label', 'spin')
   lines2SpinSlider = createSlider(0, 360, 0, 5)
-  lines2ColorPicker = createColorPicker("#ff2a00")
   createElement('label', 'weight')
   lines2StrokeWeightSlider = createSlider(1, 12, 4)
+  lines2ColorPicker = createColorPicker("#ff2a00")
 
   // dots
   createP('Dots')
