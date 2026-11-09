@@ -100,16 +100,14 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
 function drawFilament(filament) {
   if (filament === 'e') {
     push()
-    for (let i = 0; i < 5; i++) {    
-      push()
-      translate(0, 0)   
-      rotate(radians(-60))
-      fill("LightYellow")
-      stroke("brown")
-      strokeWeight(3)
-      
-      circle(0,0,40)
-      pop()
+    let diameter = 40 * 0.3
+    let radius = 12
+    fill("LightYellow")
+    stroke("brown")
+    strokeWeight(3)
+    for (let i = 0; i < 5; i++) {
+      let angle = i * TWO_PI / 5 - HALF_PI
+      circle(cos(angle) * radius, sin(angle) * radius, diameter)
     }
     pop()
   } 
