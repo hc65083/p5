@@ -25,7 +25,7 @@ function draw() {
       let petalLen = 0
       
       if (type.size === "s") {
-        petalLen = gridSize * 0.2 // shorter
+        petalLen = gridSize * 0.22 // shorter
       } 
 
       else if (type.size === 'n') {
@@ -53,7 +53,6 @@ function draw() {
 
 function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
 
-  // Rotate each petal around the flower's center.
   push()
   translate(x, y)
   let slice = TWO_PI / num
@@ -65,12 +64,14 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
   for (let i = 0; i < num; i++) {
     push()
     rotate(i * slice)
+    if (spreadType === 'p' && i % 2 === 1) {
+      scale(0.75)
+    }
 
     if (c === "skyblue") {
       triangle(-petalWidth, -petalLen, petalWidth, -petalLen, 0, -12)
     }
     else if (c === "pink") {
-      // The heart's point faces the center; its lobes face outward.
       translate(0, -12)
       beginShape()
       bezierVertex(0, 0)
