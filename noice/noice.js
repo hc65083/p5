@@ -1,5 +1,5 @@
 let cats = []
-let palette = ['#FF6B4A', '#4FD1C5', '#F2C14E', '#7C9CFF', '#C98AE0']
+let palette = ['#240903', '#ff861c', '#F2C14E', '#ffffff', '#a26b19']
 
 function setup() {
   createCanvas(600, 600)
@@ -21,7 +21,7 @@ function makeCat(x, y) {
 }
 
 function draw() {
-     background('#F3EFE6')
+     background('#f2d591')
 
   // a new creature now and then, so the room never empties
   if (frameCount % 120 === 0 && cats.length < 10) {
@@ -37,16 +37,16 @@ function draw() {
     c.x += map(noise(c.seed, c.t), 0, 1, -2, 2)
     c.y += map(noise(c.seed + 500, c.t), 0, 1, -2, 2)
 
-    // 2. run away from the mouse
+    // 2. follow the mouse when it is nearby
     if (cactivated) {
-      let away = atan2(c.y - mouseY, c.x - mouseX)
-      c.x += cos(away) * 4
-      c.y += sin(away) * 4
+      let go = atan2(mouseY - c.y, mouseX - c.x)
+      c.x += cos(go) * 4
+      c.y += sin(go) * 4
     }
     c.x = constrain(c.x, 0, width)
     c.y = constrain(c.y, 0, height)
 
-    // 3. mood: a scared creature moves through noise faster, so it wobbles more
+    // 3. mood: an excited cat moves through noise faster, so it wobbles more
     if (cactivated) {
       c.t += 0.08
     } else {
@@ -63,48 +63,54 @@ function draw() {
 }
 
 function drawCat(c, cactivated) {
- let asleep = c.life < 180
-  let alphaValue = 255
-  if (asleep) {
-    alphaValue = map(c.life, 0, 180, 0, 255)   // fade out while sleeping
-  }
-
   push()
   translate(c.x, c.y)
 
   // body
   let col = color(c.c)
-  col.setAlpha(alphaValue)
   fill(col)
-  stroke(20, 22, 31, alphaValue)
-  strokeWeight(3)
-  beginShape()
-  for (let a = 0; a < TWO_PI; a += 0.2) {
-    let n = noise(c.seed + cos(a) + 1, c.seed + sin(a) + 1, c.t)
-    let r = c.size / 2 * map(n, 0, 1, 0.7, 1.3)
-    vertex(cos(a) * r, sin(a) * r)
-  }
-  endShape(CLOSE)
+  noStroke()
+  let size = c.size * map(sin(frameCount * 0.05), -1, 1, 0.9, 1.1)
+
+  //ears
+  triangle(-size * 0.45, -size * 0.2,
+           -size * 0.4, -size * 0.65,
+           -size * 0.05, -size * 0.4)
+  triangle(size * 0.45, -size * 0.2,
+           size * 0.4, -size * 0.65,
+           size * 0.05, -size * 0.4)
+
+  //mouth
+  circle(0, 0, size)
 
   // eyes
   let e = c.size * 0.18
+  let eyeScale = cactivated ? 1.5 : 1
   
-  if (cactivated) {
-//     // closed eyes
-//     line(-e * 1.6, -e * 0.3, -e * 0.6, -e * 0.3)
-//     line(e * 0.6, -e * 0.3, e * 1.6, -e * 0.3)
-//   
     let look = atan2(mouseY - c.y, mouseX - c.x)   // where the mouse is
     for (let side = -1; side <= 1; side += 2) {
       let ex = side * e * 1.1
-      fill(255, alphaValue)
-      strokeWeight(2)
-      circle(ex, -e * 0.3, e * 1.6)
+      fill(0)
+      circle(ex, -e * 0.3, e * 1.6 * eyeScale)
       noStroke()
-      fill(20, 22, 31, alphaValue)
-      circle(ex + cos(look) * e * 0.35, -e * 0.3 + sin(look) * e * 0.35, e * 0.7)
-      stroke(20, 22, 31, alphaValue)
+      fill("white")
+      circle(ex + cos(look) * e * 0.35 * eyeScale,
+             -e * 0.3 + sin(look) * e * 0.35 * eyeScale,
+             e * 0.7 * eyeScale)
+      stroke(20, 22, 31)
     }
+
+  let mouthHalf = size * 0.05
+  let mouthY = size * 0.2
+  if (cactivated) {
+    noStroke()
+    fill("pink")
+    circle(0, mouthY, mouthHalf * 2)
+  } else {
+    stroke(20, 22, 31)
+    strokeWeight(2)
+    line(-mouthHalf, mouthY - mouthHalf, mouthHalf, mouthY + mouthHalf)
+    line(-mouthHalf, mouthY + mouthHalf, mouthHalf, mouthY - mouthHalf)
   }
 pop()
 }
