@@ -33,7 +33,7 @@ let shotsDistSlider
 let dotsNumSlider
 let dotsSizeSlider
 let dotsDistSlider
-let dotsSpinSlider
+let dotsLaySlider
 let dotsColorPicker
 let dotsGapSlider
 
@@ -95,13 +95,13 @@ function setup() {
   // dots
   createP('Dots')
   createElement('label', 'num')
-  dotsNumSlider = createSlider(1,20)
+  dotsNumSlider = createSlider(1,200)
   createElement('label', 'size')
   dotsSizeSlider = createSlider(3, 150, 6)
   createElement('label', 'distance')
   dotsDistSlider = createSlider(0, 150, 100)
-  createElement('label', 'spin')
-  dotsSpinSlider = createSlider(0, 360, 0, 5)
+  createElement('label', 'layers')
+  dotsLaySlider = createSlider(1, 10, 1, 1)
   dotsColorPicker = createColorPicker("#3f70f6")
 
   let jpgButton = createButton('Export JPG')
@@ -207,16 +207,21 @@ function drawLines2() {
 function drawDots() {
   let num = dotsNumSlider.value() // slider input
   let size = dotsSizeSlider.value() // slider input
+  let layers = dotsLaySlider.value()
+  let startDist = dotsDistSlider.value()
+  let layerGap = size + 15
   let c = color(dotsColorPicker.value())
   c.setAlpha(opacity)
-  for(let i = 0; i < num; i++) {
-    push()
-    fill(c)
-    noStroke()
-    circle(0, 0, size)
-    rotate(i/num * TWO_PI)
-    translate(dotsDistSlider.value(), 0) // distance from the center
-    rotate(-radians(dotsSpinSlider.value())) // slider input    
-    pop()
+  for(let layer = 0; layer < layers; layer++) {
+    let distance = startDist + layer * layerGap
+    for(let i = 0; i < num; i++) {
+      push()
+      fill(c)
+      noStroke()
+      rotate(i/num * TWO_PI)
+      translate(distance, 0)
+      circle(0, 0, size)
+      pop()
+    }
   }
 }
