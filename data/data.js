@@ -12,7 +12,7 @@ async function setup() {
 }
 
 function draw() {
-  background("paper");
+  background("#f7f3e8");
 
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -73,13 +73,13 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
       // The heart's point faces the center; its lobes face outward.
       translate(0, -12)
       beginShape()
-      vertex(0, 0)
-      bezierVertex(-petalWidth * 2, -petalLen * 0.5,
-                   -petalWidth, -petalLen * 1.2,
-                   0, -petalLen * 0.75)
-      bezierVertex(petalWidth, -petalLen * 1.2,
-                   petalWidth * 2, -petalLen * 0.5,
-                   0, 0)
+      bezierVertex(0, 0)
+      bezierVertex(-petalWidth * 2, -petalLen * 0.5)
+      bezierVertex(-petalWidth, -petalLen * 1.2)
+      bezierVertex(0, -petalLen * 0.75)
+      bezierVertex(petalWidth, -petalLen * 1.2)
+      bezierVertex(petalWidth * 2, -petalLen * 0.5)
+      bezierVertex(0, 0)
       endShape(CLOSE)
     }
 
