@@ -2,7 +2,7 @@ let cats = []
 let palette = ['#240903', '#ff861c', '#F2C14E', '#ffffff', '#a26b19']
 
 function setup() {
-  createCanvas(600, 600)
+  createCanvas(800, 800)
   for (let i = 0; i < 14; i++) {
     cats.push(makeCat(random(width), random(height)))
   }
