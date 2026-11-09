@@ -3,9 +3,9 @@ let gridSize = 200
 let cols, rows
 
 async function setup() {
-  createCanvas(800, 800);
-  cols = int(width/gridSize)
-  rows = int(height/gridSize)
+  createCanvas(800, 900);
+  cols = 4
+  rows = 4
 
   myData = await loadJSON('data.json');
   console.log(myData)
@@ -29,7 +29,7 @@ function draw() {
       } 
 
       else if (type.size === 'n') {
-        petalLen = gridSize * 0.35 // longer
+        petalLen = gridSize * 0.37 // longer
       }
 
       if (type.petal === "t") {
@@ -44,8 +44,9 @@ function draw() {
     
     push()
     fill("brown")
+    textFont('Georgia');
     textAlign(CENTER, CENTER)
-    text(type.mbti.toUpperCase(), x, y)
+    text(type.mbti.toUpperCase(), x, y+100)
     pop()
     }
   }
