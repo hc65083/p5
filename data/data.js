@@ -55,66 +55,34 @@ function draw() {
 
 function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
 
-  // petals
+  // Rotate each petal around the flower's center.
   push()
   translate(x, y)
   let slice = TWO_PI / num
-  let gap = slice * 0.3 // small gap between petals
-  
-//  if (c === "skyblue") {
-//     push()
-//        for (let i = 0; i < num; i++) {
-//       let petal = slice - gap
-     
-//       push()
-//       translate(0, 0) // dist from center
-//       rotate(i * slice)
-//       fill(c)
-//       triangle(0,0, 64, 64, petal/2, petal/2)
-//       pop()
-//     }
-//   pop()
-//   }
+  let petalWidth = petalLen * 0.28
+  fill(c)
 
-  // else if (c === "pink") {
-
-
-  pop()
-  
-  // spread
-  let spread = 20
-  let waviness = 10   
-  let waveFreq = 0.05 
-
-  // push()
-  // translate(x, y)
-
-  // for (let i = 0; i < num; i++) {
-  //   let d = petalLen * (i + 1) / (num + 1)   // how far down the stem
-  //   let wave = sin(d * waveFreq) * waviness  // where the stem is at that height
-    
-  //   push()
-  //   translate(wave, d)
-  //   if (i%2===0) scale(-1,1)
-  //   translate(0, 0)    // dist from mid
-  //   rotate(radians(-60))
-  //   fill(c)
-  //   rect(0, 0, spread, spread, 0, spread / 2, spread / 2, spread / 2)
-  //   pop()
-  // }
-
-  // pop()
-
-  push()
-  translate(x, y)
-
-  for (let i = 0; i < num; i++) {    
+  for (let i = 0; i < num; i++) {
     push()
-    if (i%2===0) scale(-1,1)
-    translate(0, 0)    // dist from mid
-    rotate(i*slice)
-    fill(c)
-    rect(0, 0, petalLen, petalLen, 0, petalLen / 2, petalLen / 2, petalLen / 2)
+    rotate(i * slice)
+
+    if (c === "skyblue") {
+      triangle(-petalWidth, -12, petalWidth, -12, 0, -petalLen)
+    }
+    else if (c === "pink") {
+      // The heart's point faces the center; its lobes face outward.
+      translate(0, -12)
+      beginShape()
+      vertex(0, 0)
+      bezierVertex(-petalWidth * 2, -petalLen * 0.5,
+                   -petalWidth, -petalLen * 1.2,
+                   0, -petalLen * 0.75)
+      bezierVertex(petalWidth, -petalLen * 1.2,
+                   petalWidth * 2, -petalLen * 0.5,
+                   0, 0)
+      endShape(CLOSE)
+    }
+
     pop()
   }
   pop()
