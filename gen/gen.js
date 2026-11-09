@@ -3,6 +3,7 @@ let opacity = 255
 //tail
 let tailCheckbox
 let tailLenSlider 
+let tailWidthSlider
 
 // lines 1
 let lines1NumSlider
@@ -46,12 +47,15 @@ function setup() {
   createP('Tail')
   tailCheckbox = createCheckbox('Yes', true);
   createElement('label', 'length')
-  tailLenSlider = createSlider(30,100, 50)
+  tailLenSlider = createSlider(30,120, 70)
+  createElement('label', 'width')
+  tailWidthSlider = createSlider(2,20, 7)
   
   createP('Shots')
+  createElement('label', 'num')
   shotsNumSlider = createSlider(1,10, 1) // min, max, default, step
-  createElement('label', 'gap')
-  shotsGapSlider = createSlider(50,150, 10)
+  createElement('label', 'fan')
+  shotsGapSlider = createSlider(50,150, 0)
   createElement('label', 'length')
   shotsLenSlider = createSlider(1,10, 1)
   createElement('label', 'width')
@@ -72,7 +76,7 @@ function setup() {
   lines1SpinSlider = createSlider(0, 360, 90, 5)
   createElement('label', 'weight')
   lines1StrokeWeightSlider = createSlider(1, 20, 6)
-  lines1ColorPicker = createColorPicker("#ffff00")
+  lines1ColorPicker = createColorPicker("#ffe75f")
 
   // lines 2
   createP('Lines 2')
@@ -93,12 +97,12 @@ function setup() {
   createElement('label', 'num')
   dotsNumSlider = createSlider(1,20)
   createElement('label', 'size')
-  dotsSizeSlider = createSlider(30, 150, 60)
+  dotsSizeSlider = createSlider(3, 150, 6)
   createElement('label', 'distance')
   dotsDistSlider = createSlider(0, 150, 100)
   createElement('label', 'spin')
   dotsSpinSlider = createSlider(0, 360, 0, 5)
-  dotsColorPicker = createColorPicker("#ff2a00")
+  dotsColorPicker = createColorPicker("#3f70f6")
 
   let jpgButton = createButton('Export JPG')
   jpgButton.mousePressed(function() {
@@ -143,14 +147,20 @@ function drawTail() {
   let len = tailLenSlider.value() 
   let num = shotsNumSlider.value()
   let gap = shotsGapSlider.value()
+  let width = tailWidthSlider.value() 
   let c = color(shotsColorPicker.value())
   c.setAlpha(opacity)
   for(let i = 0; i < num; i++) {
     push()
-    strokeWeight(shotsStrokeWeightSlider.value())
+    strokeWeight(width)
     stroke(c)
     rotate(i/num * TWO_PI)
-    rotate(radians(gap))
+    if (num > 1) {
+      rotate(radians(gap))
+    } else {
+      translate(0, 150)
+      rotate(HALF_PI)
+    }
     line(-len/2,0,len/2,0)
     pop()
   }
@@ -195,18 +205,18 @@ function drawLines2() {
 }
 
 function drawDots() {
-  let num = dotNumSlider.value() // slider input
+  let num = dotsNumSlider.value() // slider input
   let size = dotsSizeSlider.value() // slider input
   let c = color(dotsColorPicker.value())
   c.setAlpha(opacity)
   for(let i = 0; i < num; i++) {
     push()
-    stroke(c)
-    strokeWeight(dotsStrokeWeightSlider.value())
+    fill(c)
+    noStroke()
+    circle(0, 0, size)
     rotate(i/num * TWO_PI)
     translate(dotsDistSlider.value(), 0) // distance from the center
     rotate(-radians(dotsSpinSlider.value())) // slider input    
-    circle(-size/2,0,size/2,0) 
     pop()
   }
 }
