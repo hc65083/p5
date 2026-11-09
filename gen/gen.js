@@ -1,7 +1,6 @@
 let opacity = 255
 
-let triNumSlider
-let triGapSlider
+let tailCheckbox
 
 // lines 1
 let lines1NumSlider
@@ -10,7 +9,6 @@ let lines1DistSlider
 let lines1SpinSlider
 let lines1ColorPicker
 let lines1StrokeWeightSlider
-let showLines1Checkbox
 
 // lines 2
 let lines2NumSlider
@@ -20,17 +18,29 @@ let lines2SpinSlider
 let lines2ColorPicker
 let lines2StrokeWeightSlider
 
+let shotsNumSlider
+let shotsGapSlider
+let shotsColorPicker
+let shotsLenSlider
+
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 600);
   strokeWeight(4)
   strokeCap(PROJECT)
 
-    //triangle
-  createP('Triangles')
-  createElement('label', 'num')
-  triNumSlider = createSlider(1,10, 1) // min, max, default, step
+  
+  createP('Create Your Own Firework')
+  createP('Tail')
+  tailCheckbox = createCheckbox('Yes', true);
+  
+  createP('Shots')
+  shotsNumSlider = createSlider(1,10, 1) // min, max, default, step
   createElement('label', 'gap')
-  triGapSlider = createSlider(50,150, 10)
+  shotsGapSlider = createSlider(50,150, 10)
+  createElement('label', 'color')
+  shotsColorPicker = shotsColorPicker("#ff2a00")
+  createElement('label', 'length')
+  shotsLenSlider = createSlider(1,10, 1)
 
   // lines 1
   createP('Lines 1')
@@ -40,18 +50,17 @@ function setup() {
   lines1DistSlider = createSlider(0, 150, 100)
   lines1SpinSlider = createSlider(0, 360, 90, 5)
   lines1ColorPicker = createColorPicker("#ffff00")
-  lines1StrokeWeightSlider = createSlider(10, 60, 30)
-  showLines1Checkbox = createCheckbox('show', true);
+  lines1StrokeWeightSlider = createSlider(1, 20, 6)
 
   // lines 2
   createP('Lines 2')
   createElement('label', 'num')
-  lines2NumSlider = createSlider(1,12)
+  lines2NumSlider = createSlider(1,20)
   lines2LenSlider = createSlider(30, 150, 60)
   lines2DistSlider = createSlider(0, 150, 100)
   lines2SpinSlider = createSlider(0, 360, 0, 5)
-  lines2ColorPicker = createColorPicker("#00ffff")
-  lines2StrokeWeightSlider = createSlider(10, 60, 30)
+  lines2ColorPicker = createColorPicker("#ff2a00")
+  lines2StrokeWeightSlider = createSlider(1, 12, 4)
 
   let jpgButton = createButton('Export JPG')
   jpgButton.mousePressed(function() {
@@ -60,27 +69,31 @@ function setup() {
 }
 
 function draw() {
-  background("white");
+  background("black");
   translate(width/2, height/2)
-  if (showLines1Checkbox.checked()) {
-    drawLines()
+  if (tailCheckbox.checked()) {
+    drawTail()
   }
+  drawLines()
   drawLines2()
-  drawTriangles()
+  drawShots()
 }
 
-function drawTriangles() {
-  let num = triNumSlider.value()
-  let gap = triGapSlider.value()
-  for(let i=0; i < num; i++) {
+function drawShots() {
+  let num = shotsNumSlider.value()
+  let gap = shotsGapSlider.value()
+  let len = shotsLenSlider.value() 
+  let c = color(shotsColorPicker.value())
+  c.setAlpha(opacity)
+
+  for(let i = 0; i < num; i++) {
     push()
-    fill("pink")
-    strokeJoin(ROUND); 
-    stroke("pink")
+    strokeWeight(shotsStrokeWeightSlider.value())
+    stroke(c)
     rotate(i/num * TWO_PI)
-    translate(100,0)
-    triangle(0,0,50,50, 50, -50)
-    translate(gap ,0)
+    translate(shotsDistSlider.value() ,0) // dist from center
+    rotate(radians(gap))
+    line(-len/2,0,len/2,0)
     pop()
   }
 }
