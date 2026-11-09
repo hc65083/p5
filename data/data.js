@@ -109,6 +109,7 @@ function drawFilament(filament) {
       let angle = i * TWO_PI / 5 - HALF_PI
       circle(cos(angle) * radius, sin(angle) * radius, diameter)
     }
+    circle(0, 0, diameter)
     pop()
   } 
 
