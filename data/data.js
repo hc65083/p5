@@ -12,8 +12,7 @@ async function setup() {
 }
 
 function draw() {
-  background("#f7f3e8");
-
+  background("rgb(174, 231, 150)");
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
       
@@ -44,8 +43,7 @@ function draw() {
     drawFlower(x, y, petalLen, c, type.filament, type.spread, num)
     
     push()
-    fill("black")
-    noStroke()
+    fill("brown")
     textAlign(CENTER, CENTER)
     text(type.mbti.toUpperCase(), x, y)
     pop()
@@ -61,13 +59,15 @@ function drawFlower(x, y, petalLen, c, filament, spreadType, num) {
   let slice = TWO_PI / num
   let petalWidth = petalLen * 0.28
   fill(c)
+  stroke("brown")
+  strokeWeight(3)
 
   for (let i = 0; i < num; i++) {
     push()
     rotate(i * slice)
 
     if (c === "skyblue") {
-      triangle(-petalWidth, -12, petalWidth, -12, 0, -petalLen)
+      triangle(-petalWidth, -petalLen, petalWidth, -petalLen, 0, -12)
     }
     else if (c === "pink") {
       // The heart's point faces the center; its lobes face outward.
@@ -103,6 +103,9 @@ function drawFilament(filament) {
       translate(0, 0)   
       rotate(radians(-60))
       fill("LightYellow")
+      stroke("brown")
+      strokeWeight(3)
+      
       circle(0,0,40)
       pop()
     }
@@ -111,7 +114,10 @@ function drawFilament(filament) {
 
   else if (filament === 'i') {
     fill("LightYellow")
+    stroke("brown")
+    strokeWeight(3)
     ellipse(0,0,40)
+    
   }
 
 }
