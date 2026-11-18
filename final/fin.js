@@ -4,7 +4,7 @@ let rowGap = 30;
 let minOvalRatio = 0.8;
 let maxOvalRatio = 550 / 350; 
 let palette = ["red", "yellow", "green", "orange"];
-let fillOptions = [...palette, null]; // null leaves the pair outlined.
+let fillOptions = [...palette, null];
 
 function setup() {
   createCanvas(495, 825);
