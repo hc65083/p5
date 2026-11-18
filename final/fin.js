@@ -37,6 +37,9 @@ function draw() {
 
 function drawDoubleD(x, y, size = 1, ovalRatio = 550 / 350, fillColor = null, strokeColor = "red") {
   let bowlWidth = max(1, (350 * ovalRatio - 150) / 2);
+  let strokeWidth = 40;
+  let lineTop = 150 - strokeWidth / 2;
+  let lineBottom = 450 + strokeWidth / 2;
   push();
   translate(x, y);
   scale(size);
@@ -47,22 +50,22 @@ function drawDoubleD(x, y, size = 1, ovalRatio = 550 / 350, fillColor = null, st
     noFill();
   }
   stroke(strokeColor);
-  strokeWeight(40);
-  strokeCap(ROUND);
+  strokeWeight(strokeWidth);
+  strokeCap(SQUARE);
 
   push();
   translate(150, 0);
   //D1
-  line(200, 150, 200, 450);
   arc(200, 300, bowlWidth * 2, 300, -HALF_PI, HALF_PI);
+  line(200, lineTop, 200, lineBottom);
   pop();
 
   push();
   translate(500, 0);
   scale(-1, 1);
   //D2
-  line(200, 150, 200, 450);
   arc(200, 300, bowlWidth * 2, 300, -HALF_PI, HALF_PI);
+  line(200, lineTop, 200, lineBottom);
   pop();
 
   drawFourPointStar(325, 70, 70, 30);
