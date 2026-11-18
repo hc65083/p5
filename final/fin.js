@@ -7,7 +7,7 @@ function setup() {
 
 function draw() {
   background(255);
-  
+
   if (numberOfPairs < 1) return;
 
   let columns = ceil(sqrt(numberOfPairs));
@@ -34,7 +34,6 @@ function drawDoubleD(x, y, size = 1) {
   strokeWeight(50);
   strokeCap(ROUND);
 
-  // Place the first D on the right.
   push();
   translate(150, 0);
   //D1
@@ -43,10 +42,10 @@ function drawDoubleD(x, y, size = 1) {
   pop()
   pop();
 
-   // Place the horizontally flipped D on the left.
   push();
   translate(450, 0);
   scale(-1, 1);
+  strokeWeight(50);
   //D2
   line(200, 150, 200, 450);
   arc(200, 300, 400, 300, -HALF_PI, HALF_PI);
