@@ -21,7 +21,7 @@ function draw() {
   let cellWidth = width / columns;
   let cellHeight = height / rows;
   let pairScale = min(dHeight / 350, min(cellWidth, cellHeight) / 600);
-  let pairHeight = 415 * pairScale; // Include the star above the Ds.
+  let pairHeight = 415 * pairScale;
   let rowStep = min(pairHeight + rowGap, cellHeight);
   let firstRowY = height / 2 - ((rows - 1) * rowStep) / 2;
 
