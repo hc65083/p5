@@ -5,14 +5,24 @@ let minOvalRatio = 0.8;
 let maxOvalRatio = 550 / 350; 
 let palette = ["red", "yellow", "green", "orange"];
 let fillOptions = [...palette, null];
+let myFont;
 
-function setup() {
+async function setup() {
   createCanvas(495, 825);
   noLoop();
+  myFont = await loadFont('Unbounded.ttf');
+  textFont(myFont);
+  textSize(36);
 }
 
 function draw() {
   background("black");
+
+  push();
+  fill("white");
+  noStroke();
+  text('Calling All Foodies', 35, 110);
+  pop();
 
   if (numberOfPairs < 1) return;
 
@@ -87,3 +97,4 @@ function drawFourPointStar(x, y, outerRadius, innerRadius) {
   endShape(CLOSE);
   pop();
 }
+
