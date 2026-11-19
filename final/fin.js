@@ -1,4 +1,4 @@
-let numberOfPairs = 25; 
+let numberOfPairs = 50; 
 let dHeight = 100;
 let rowGap = 30;
 let minOvalRatio = 0.8;
@@ -6,7 +6,10 @@ let maxOvalRatio = 550 / 350;
 let palette = ["red", "yellow", "green", "orange"];
 let fillOptions = [...palette, null];
 let myFont;
-
+//Transform tomatoes and disintegrate them
+//The tomato will 
+//more spikes
+//
 async function setup() {
   createCanvas(495, 825);
   noLoop();
